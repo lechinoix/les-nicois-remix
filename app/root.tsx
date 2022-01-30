@@ -8,7 +8,7 @@ import {
 } from "remix";
 import type { MetaFunction } from "remix";
 
-import tailwind from "./tailwind.css";
+import tailwind from "./styles/app.css";
 
 export function links() {
   return [{ rel: "stylesheet", href: tailwind }];
