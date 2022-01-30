@@ -1,0 +1,21 @@
+.responsive-grid {
+  display: grid;
+  grid-gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .responsive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+}
+
+.responsive-grid__item {
+  position: relative;
+  padding-bottom: 50%;
+}
+
+.responsive-grid__item-content {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
