@@ -1,13 +1,17 @@
 import config from '~/config/env';
 import { AdventureStatus } from '~/config/constants';
 import type { Adventure, Picture } from '~/config/types';
+import { marked } from 'marked';
 
 const fetchAdventures = async (searchParams: URLSearchParams) => {
 	const res = await fetch(`${config.BASE_API_URL}/adventures?${searchParams.toString()}`);
 	if (!res.ok) throw new Error(res.statusText);
 
 	const adventures = await res.json();
-	return adventures;
+	return adventures.map((adventure: Adventure) => {
+		adventure.description = adventure.description ? marked(adventure.description) : ''
+		return adventure;
+	});
 };
 
 export const getAllAdventures = async (): Promise<Adventure[]> =>

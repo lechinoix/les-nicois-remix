@@ -1,65 +1,25 @@
 import type { LoaderFunction } from "remix";
 import React from "react";
 import { useLoaderData } from "remix";
-import { marked } from "marked";
+import { getAdventuresDone } from "~/services/adventureService";
+import { Adventure } from "~/config/types";
+import { formatFrenchDate } from "~/utils/date";
 
-type Post = {
-  title: string;
-  article: string;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-};
-
-type PostData = { id: string; attributes: Post }[];
-
-type PostResponse = {
-  data: PostData;
-  meta: {
-    pagination: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-};
-
-export const loader: LoaderFunction = async () => {
-  // This is where Remix integrates with Strapi
-  const response = await fetch("http://localhost:1337/api/posts");
-  const postResponse = (await response.json()) as PostResponse;
-
-  return postResponse.data.map(post => ({
-    ...post,
-    attributes: {
-      ...post.attributes,
-      article: marked(post.attributes.article)
-    }
-  }));
-};
+export const loader: LoaderFunction = getAdventuresDone;
 
 const Posts: React.FC = () => {
-  const posts = useLoaderData<PostData>();
+  const adventures = useLoaderData<Adventure[]>();
 
   return (
     <>
-      {posts.map(post => {
-        const { title, article, createdAt } = post.attributes;
-        const date = new Date(createdAt).toLocaleString("en-US", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-
+      {adventures.map(adventure => {
         return (
-          <article key={post.id}>
-            <h1>{title}</h1>
-            <time dateTime={createdAt}>{date}</time>
+          <article key={adventure.id}>
+            <h1>{adventure.title}</h1>
+            <time dateTime={adventure.date}>{formatFrenchDate(adventure.date)}</time>
             {/* Reminder that this can in fact be dangerous
                 https://reactjs.org/docs/dom-elements.html#dangerouslysetinnerhtml */}
-            <div dangerouslySetInnerHTML={{ __html: article }} />
+            <div dangerouslySetInnerHTML={{ __html: adventure.description }} />
           </article>
         );
       })}
