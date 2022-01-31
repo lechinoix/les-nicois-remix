@@ -8,13 +8,14 @@
 	import Mountain from '../icons/various/mountain';
 	import SandClock from '../icons/various/sandClock';
 	import Compass from '../icons/various/compass';
+import { PropsWithChildren } from 'react';
 
-	type PropsType = {
+	type PropsType = PropsWithChildren<{
 		adventure: Adventure;
-		onClick: (() => void);
-	}
+		onClick?: (() => void);
+	}>
 
-export default ({ adventure, onClick = () => null }: PropsType) => (
+export default ({ adventure, onClick = () => null, children }: PropsType) => (
 	<div>
 		<AdventureCover adventure={adventure} onClick={onClick} coverType={CoverTypes.LARGE} />
 		<Container>
@@ -46,7 +47,7 @@ export default ({ adventure, onClick = () => null }: PropsType) => (
 						</Picto>
 					}
 				</div>
-				<slot />
+				{children}
 			</div>
 		</Container>
 	</div>
