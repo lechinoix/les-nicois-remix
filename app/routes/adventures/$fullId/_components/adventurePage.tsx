@@ -1,22 +1,19 @@
-import type { Adventure, Picture } from '~/config/types';
-import marked from 'marked';
-import Slider from '~/components/slider';
+import type { Adventure } from '~/config/types';
+import Slider, { links as sliderLinks } from '~/components/slider';
 import TopoLink from '~/components/topoLink';
 import AdventureCard from '~/components/adventures/adventureHeader';
 import Container from '~/components/container';
 import { formatFrenchDate } from '~/utils/date';
-import { slugify, truncateText } from '~/utils/string';
-import { getUrlWithNewSlug } from '~/utils/url';
+import { truncateText } from '~/utils/string';
 import uniqBy from 'lodash/uniqBy.js';
-import findIndex from 'lodash/findIndex.js';
-// import { sliderRef } from '~/stores/slider';
-import type { LightGallery } from 'lightgallery/lightgallery';
 import { getCoverPicture } from '~/services/adventureService';
 import { MetaFunction } from 'remix';
 
 type PropsType = {
 	adventure: Adventure
 }
+
+export const links = sliderLinks;
 
 export const meta: MetaFunction = ({ data: { adventure } }) => {
 	return {
@@ -62,7 +59,7 @@ export default ({ adventure }: PropsType) => {
 							<br />
 						</>
 					}
-					<span dangerouslySetInnerHTML={marked(adventure.description || '')} />
+					<span dangerouslySetInnerHTML={{ __html: adventure.description || '' }} />
 				</p>
 				<br />
 				<br />
@@ -70,10 +67,10 @@ export default ({ adventure }: PropsType) => {
 					<>
 						<b>Topo</b> :
 						{adventure.topo.map(topo => (
-							<>
+							<div key={topo.id}>
 								<TopoLink topo={topo} />
 								<br />
-							</>
+							</div>
 						))}
 					</>
 				}

@@ -9,7 +9,7 @@ export const getUrlWithNewSlug = (location: Location, slug: string): string => {
 };
 
 export const extractIdAndSlug = (fullId: string) => {
-	const match = new RegExp(/^([a-zA-Z0-9])*_([a-zA-Z0-9])*$/).exec(fullId)
+	const match = new RegExp(/^([0-9]*)_([a-zA-Z0-9-]*)$/).exec(fullId)
 
 	if (!match) throw new Error('Could not extract id and slug')
 	const [, id, slug] = match

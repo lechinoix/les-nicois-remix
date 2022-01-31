@@ -1,10 +1,12 @@
 import { getPreviewById } from '~/services/adventureService';
 import type { Adventure } from '~/config/types';
-import AdventurePage from './_components/adventurePage';
+import AdventurePage, { links as adventurePageLinks } from './_components/adventurePage';
 import { LoaderFunction, useLoaderData } from 'remix';
 import { extractIdAndSlug } from '~/utils/url';
 
 type LoaderDataType = { adventure: Adventure }
+
+export const links = adventurePageLinks;
 
 export const loader: LoaderFunction = async ({ params, request }): Promise<LoaderDataType> => {
 	if (!params.fullId) throw new Error('Could not find fullId url param')

@@ -7,16 +7,16 @@ type PropsType = {
 	position: PicturePosition | null;
 	href: string;
 	title: string;
-	onClick: (() => void);
+	onClick: (() => void) | null;
 }
 
 const chooseFormatUrlFromPicture = (picture: Picture) =>
 	picture.formats.medium ? picture.formats.medium.url : picture.url;
 
-export default ({ picture,	position = null,	href = '#',	title = '',	onClick = () => null }: PropsType) => (
+export default ({ picture,	position = null,	href = '#',	title = '',	onClick }: PropsType) => (
 	<a
 		href={href}
-		onClick={onClick}
+		onClick={onClick || (() => null)}
 		className="
 			block relative w-full h-full
 			overflow-hidden bg-gray-300

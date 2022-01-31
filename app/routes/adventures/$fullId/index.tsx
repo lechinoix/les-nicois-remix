@@ -3,7 +3,7 @@ import { getAdventureById } from '~/services/adventureService';
 import { extractIdAndSlug } from '~/utils/url';
 import Container from '~/components/container';
 import type { Adventure, Comment } from '~/config/types';
-import AdventurePage from './_components/adventurePage';
+import AdventurePage, { links as adventurePageLinks } from './_components/adventurePage';
 import CommentForm from '~/components/comments/commentForm';
 import CommentBox from '~/components/comments/commentBox';
 import uniqBy from 'lodash/uniqBy.js';
@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 type LoaderDataType = {
 	adventure: Adventure;
 }
+
+export const links = adventurePageLinks;
 
 export const loader: LoaderFunction = async ({ params }): Promise<LoaderDataType> => {
 	if (!params.fullId) throw new Error('Could not find fullId url param')

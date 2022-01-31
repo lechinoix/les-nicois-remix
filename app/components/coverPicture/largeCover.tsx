@@ -9,17 +9,17 @@
 		position: PicturePosition | null;
 		title: string;
 		href?: string;
-		onClick?: (() => void);
+		onClick?: (() => void)| null
 	}
 
 	const chooseFormatUrlFromPicture = (picture: Picture) =>
 		picture.formats.xlarge ? picture.formats.xlarge.url : picture.url;
 
 
-export default ({ picture, position = null, title = '', href = EMPTY_HREF, onClick = () => null }: PropsType) => (
+export default ({ picture, position = null, title = '', href = EMPTY_HREF, onClick }: PropsType) => (
 	<a
 		href={href}
-		onClick={onClick}
+		onClick={onClick || (() => null)}
 		className={`relative w-full h-96 flex bg-gray-400 ${
 			href === EMPTY_HREF && onClick !== null ? 'cursor-default' : 'cursor-pointser'
 		}`}

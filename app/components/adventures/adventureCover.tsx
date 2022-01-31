@@ -16,10 +16,10 @@ const mapTypeToComponent = {
 type PropsType = {
 	adventure: Adventure;
 	coverType: CoverTypes;
-	onClick: (() => void);
+	onClick?: (() => void) | null;
 }
 
-export default ({ adventure, coverType = CoverTypes.LARGE, onClick = () => null }: PropsType) => {
+export default ({ adventure, coverType = CoverTypes.LARGE, onClick = null }: PropsType) => {
 	const position = adventure.cover_picture?.position;
 	const picture = getCoverPicture(adventure);
 	const title = adventure.title;
