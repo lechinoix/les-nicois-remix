@@ -8,8 +8,8 @@
 		picture: Picture | null;
 		position: PicturePosition | null;
 		title: string;
-		href: string;
-		onClick: (() => void);
+		href?: string;
+		onClick?: (() => void);
 	}
 
 	const chooseFormatUrlFromPicture = (picture: Picture) =>

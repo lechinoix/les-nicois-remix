@@ -16,6 +16,7 @@
     "@remix-run/react": "^1.1.1",
     "@remix-run/serve": "^1.1.1",
     "lightgallery": "^2.3.0",
+    "lodash": "^4.17.21",
     "marked": "^4.0.12",
     "nanoid": "^3.2.0",
     "react": "^17.0.2",

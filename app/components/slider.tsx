@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 type PropsType = {
 	pictures: Picture[],
-	galleryName: string
+	galleryName?: string
 }
 
 export default ({ pictures = [], galleryName = 'slider' }: PropsType) => {
