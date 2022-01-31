@@ -20,7 +20,7 @@ type PropsType = {
 
 export const meta: MetaFunction = ({ data: { adventure } }) => {
 	return {
-		"og:image": getCoverPicture(adventure)?.formats.medium.url,
+		"og:image": getCoverPicture(adventure)?.formats.medium.url || '',
 		"og:title": adventure.title,
 		"og:description": adventure.short_description || truncateText(adventure.description)
 	}

@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 type PropsType = React.PropsWithChildren<{ title: string }>;
 
 export default ({ title, children }: PropsType) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false)
 
-	const open = (event: any) => {
+	const open = useCallback((event) => {
 		if (!isOpen) event.stopPropagation();
 		setIsOpen(true);
-	};
+	}, [isOpen]);
 
 	const close = () => {
 		setIsOpen(false);

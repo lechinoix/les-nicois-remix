@@ -1,4 +1,4 @@
-type PropsType ={ items: { component: any; props: {}; key: string }[] };
+type PropsType = { items: { component: any; props: any; key: string }[] };
 
 export default ({ items }: PropsType) => (
 	<div className="grid gap-4 md:grid-cols-3">

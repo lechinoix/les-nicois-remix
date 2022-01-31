@@ -19,9 +19,9 @@ import { fetchPictureById } from '~/services/uploadPluginService';
 import { LoaderFunction, MetaFunction, useLoaderData } from 'remix';
 
 export const loader: LoaderFunction = async (): Promise<LoaderDataType> => {
-	let latestAdventures = await getLatestAdventures();
-	let coverPicture = await fetchPictureById(fetch, env.COVER_PICTURE_ID);
-	let sports = await getAllSports(fetch);
+	const latestAdventures = await getLatestAdventures();
+	const coverPicture = await fetchPictureById(fetch, env.COVER_PICTURE_ID);
+	const sports = await getAllSports();
 
 	return { latestAdventures, coverPicture, sports }
 };

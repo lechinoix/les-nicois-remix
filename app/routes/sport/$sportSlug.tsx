@@ -14,7 +14,7 @@ type LoaderDataType = {
 export const loader: LoaderFunction = async ({ params }): Promise<LoaderDataType> => {
 	if (!params.sportSlug) throw new Error('You need to specify a sportSlug');
 
-	const sport = await getSportBySlug(fetch, params.sportSlug);
+	const sport = await getSportBySlug(params.sportSlug);
 	return { sport }
 }
 

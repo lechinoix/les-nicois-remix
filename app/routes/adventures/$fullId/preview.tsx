@@ -10,7 +10,7 @@ export const loader: LoaderFunction = async ({ params, request }): Promise<Loade
 	if (!params.fullId) throw new Error('Could not find fullId url param')
 
 	const { id } = extractIdAndSlug(params.fullId)
-	let url = new URL(request.url);
+	const url = new URL(request.url);
 	const adventure = await getPreviewById(id, url.searchParams.get('token'));
 	return { adventure }
 }

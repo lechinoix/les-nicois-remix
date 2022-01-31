@@ -18,9 +18,7 @@ import { getAllSports } from '~/services/sportService';
 type LoaderDataType = Sport[];
 
 export const loader: LoaderFunction = async (): Promise<LoaderDataType> => {
-	let sports = await getAllSports(fetch);
-
-	return sports;
+	return getAllSports(fetch)
 }
 
 export function links() {
