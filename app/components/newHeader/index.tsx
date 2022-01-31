@@ -1,25 +1,26 @@
 import type { Sport } from '~/config/types';
 import { ROUTES } from '~/config/routes';
 import BurgerIcon from './burgerIcon';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import styles from './styles.css';
 
-type PropsType ={ sports: Sport[] };
+type PropsType = { sports: Sport[] };
 
 export const links = () => [
   { rel: "stylesheet", href: styles }
 ];
 
 export default ({ sports }: PropsType) => {
-	let [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isOpen, setIsOpen] = useState(false);
+	const buttonRef = useRef<HTMLButtonElement>(null)
 
-	const openMenu = (event: any) => {
-		if (!isOpen) event.stopPropagation();
-		setIsOpen(true);
-	};
+	const toggleMenu = useCallback(() => {
+		setIsOpen(!isOpen);
+	}, [isOpen]);
 
-	const closeMenu = () => {
+	const closeMenu = (event: Event) => {
+		if (event.target instanceof Element && buttonRef?.current !== null && buttonRef.current.contains(event.target)) return;
 		setIsOpen(false);
 	};
 
@@ -38,7 +39,7 @@ export default ({ sports }: PropsType) => {
 					<img src="/img/les-nicois.png" alt="Un dessin d'Ambre et Nicolas grimpant" className="w-14" />
 					<span className="text-2xl text-white font-extralight ml-4"> Les Niçois en Vadrouille </span>
 				</a>
-				<BurgerIcon isOpen={isOpen} onClick={openMenu} ratio={3} />
+				<BurgerIcon isOpen={isOpen} onClick={toggleMenu} ratio={3} ref={buttonRef} />
 			</div>
 			<div className="flex flex-col items-end">
 				{isOpen && (
