@@ -1,12 +1,10 @@
-import "./responsiveGrid.css"
-
 type PropsType ={ items: { component: any; props: {}; key: string }[] };
 
 export default ({ items }: PropsType) => (
-	<div className="responsive-grid">
+	<div className="grid gap-4 md:grid-cols-3">
 		{items.map(item => (
-			<div className="responsive-grid__item" key={item.key}>
-				<div className="responsive-grid__item-content">
+			<div className="relative" style={{ paddingBottom: '50%' }} key={item.key}>
+				<div className="absolute w-full h-full">
 					<item.component {...item.props} />
 				</div>
 			</div>

@@ -5,7 +5,7 @@ type PropsType = {
 }
 
 export default ({ isOpen = false, ratio = 3, onClick }: PropsType) => (
-	<button className={`${isOpen ? 'opened' : ''}`} onClick={onClick} style={{'--ratio': ratio} as React.CSSProperties}>
+	<button className={`burger-icon ${isOpen ? 'opened' : ''}`} onClick={onClick} style={{'--ratio': ratio} as React.CSSProperties}>
 		<span />
 		<span />
 		<span />

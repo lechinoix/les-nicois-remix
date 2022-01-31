@@ -1,11 +1,15 @@
 import type { Sport } from '~/config/types';
 import { ROUTES } from '~/config/routes';
 import BurgerIcon from './burgerIcon';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import styles from './styles.css';
 
 type PropsType ={ sports: Sport[] };
 
-// <svelte:body on:click={closeMenu} />
+export const links = () => [
+  { rel: "stylesheet", href: styles }
+];
 
 export default ({ sports }: PropsType) => {
 	let [isOpen, setIsOpen] = useState<boolean>(false);
@@ -14,9 +18,18 @@ export default ({ sports }: PropsType) => {
 		if (!isOpen) event.stopPropagation();
 		setIsOpen(true);
 	};
+
 	const closeMenu = () => {
 		setIsOpen(false);
 	};
+
+	useEffect(() => {
+    document.body.addEventListener("click", closeMenu);
+
+    return () => {
+      document.body.removeEventListener("click", closeMenu);
+    };
+  }, []);
 
 	return (
 		<nav className="absolute bg-linear-b-w py-5 z-10 mx-auto w-full px-5" style={{background: 'linear-gradient(rgba(0, 0, 0, 0.5) 95%, rgba(0, 0, 0, 0))'}}>
@@ -35,6 +48,7 @@ export default ({ sports }: PropsType) => {
 								href={`/sport/${sport.slug}`}
 								className="flex text-white block px-4 py-2 text-sm justify-start items-center uppercase"
 								role="menuitem"
+								key={sport.id}
 							>
 								<p>{sport.name} ({sport.adventures.length})</p>
 							</a>
